@@ -1,0 +1,48 @@
+body {
+    font-family: Verdana;
+    font-size: 10pt;
+    background-color: #DDDDDD;
+}
+
+h1, h2 {
+    font-family: uppereastsideregular;
+}
+
+h1 {
+    font-size: 36pt;
+}
+
+h2 {
+    font-size: 24pt;
+}
+
+h3 {
+    font-size: 12pt;
+}
+
+
+nav {
+    font-size: 12pt;
+    background-color: #EEEEEE;
+    width: 135px;
+}
+
+#user, header, #main, footer {
+    background-color: #EEEEEE;
+}
+
+#main, nav, header, footer {
+    margin: 5px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#main {
+    width: 600px;
+}
+
+
+
