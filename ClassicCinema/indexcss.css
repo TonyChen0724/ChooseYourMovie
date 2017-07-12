@@ -40,6 +40,10 @@ nav {
     border-bottom-right-radius: 20px;
 }
 
+header {
+    background: url(images/headerBackground.png);
+}
+
 #main {
     width: 600px;
 }
