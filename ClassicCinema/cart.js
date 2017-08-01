@@ -4,16 +4,16 @@
 // todo: add obj to an array stored in cookie
 var Cart = (function () {
     var pub = {};
-    var cart = []
+    var cart = [];
     function addToCart() {
         var temptObj = new MovieObject(this.parentNode.parentNode.getElementsByTagName("h3")[0].innerHTML,
             this.parentNode.parentNode.getElementsByClassName("price")[0].innerHTML
         );
         if (window.Cookie.get("cart") === null) {
             cart.push(temptObj);
-            window.Cookie.set("cart", JSON.stringify(cart));
+            window.Cookie.set("cart", JSON.stringify(cart)); // create new cart
         } else {
-            cart = JSON.parse(window.Cookie.get("cart"));
+            cart = JSON.parse(window.Cookie.get("cart")); // load old cart cuz it's exist
             cart.push(temptObj);
             window.Cookie.set("cart", JSON.stringify(cart));
         }
