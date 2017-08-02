@@ -1,7 +1,6 @@
 /**
  * Created by xichen on 7/27/17.
  */
-// todo: add obj to an array stored in cookie
 var Cart = (function () {
     var pub = {};
     var cart = [];
