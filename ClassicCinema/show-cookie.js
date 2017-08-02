@@ -9,10 +9,16 @@ var ShowCookie = (function() {
     var sum = 0;
 
     function printout() {
-        var body = document.getElementsByTagName("body")[0];
+        var body = document.getElementById("cartInfo");
         this.makeHTML = function() {
             carts = JSON.parse(window.Cookie.get("cart"));
+            if (carts === null) {
+                var form = document.getElementById("checkoutForm");
+                form.style.display = 'none';
+                return "<p> you haven't bought anything </p>";
+            }
             var numbers = carts.length;
+
             // <p> name: price<p>
             var statement = "<table> <tr><th>title</th><th>price</th></tr>";
             for (var i = 0; i < numbers; i++) {
@@ -38,5 +44,5 @@ if (window.addEventListener) {
 } else if (window.attachEvent) {
     window.attachEvent('onload', ShowCookie.setup);
 } else {
-    alert("Could not attach 'ShowCookie.setup' to the 'window.onload' event");
+    window.alert("Could not attach 'ShowCookie.setup' to the 'window.onload' event");
 }
