@@ -1,0 +1,10 @@
+<reviews>
+  <review>
+    <user>Alice</user>
+    <rating>2</rating>
+  </review>
+  <review>
+    <user>Bob</user>
+    <rating>2</rating>
+  </review>
+</reviews>

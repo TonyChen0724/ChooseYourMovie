@@ -1,46 +1,85 @@
 /**
- * Created by xichen on 7/27/17.
+ * Shopping cart functions for the category pages
+ *
+ * Created by: Steven Mills, 09/04/2014
+ * Last Modified by: Steven Mills 08/08/2016
+ */
+
+/* global Cookie */
+
+/**
+ * Module pattern for Cart functions
  */
 var Cart = (function () {
-    var pub = {};
-    var cart = [];
-    function addToCart() {
-        var temptObj = new MovieObject(this.parentNode.parentNode.getElementsByTagName("h3")[0].innerHTML,
-            this.parentNode.parentNode.getElementsByClassName("price")[0].innerHTML
-        );
-        if (window.Cookie.get("cart") === null) {
-            cart.push(temptObj);
-            window.Cookie.set("cart", JSON.stringify(cart)); // create new cart
+    "use strict";
+
+    var pub;
+
+    // Public interface
+    pub = {};
+
+    /**
+     * Add items to the cart
+     *
+     * This function is called when a 'Buy' button is clicked.
+     * The cart itself is stored in a cookie, which is updated each time this function is called.
+     */
+    /*function addToCart() {
+        var itemList, newItem;
+        itemList = Cookie.get("cart");
+        if (itemList) {
+            itemList = JSON.parse(itemList);
         } else {
-            cart = JSON.parse(window.Cookie.get("cart")); // load old cart cuz it's exist
-            cart.push(temptObj);
-            window.Cookie.set("cart", JSON.stringify(cart));
+            itemList = [];
         }
+        newItem = {};
+        newItem.title = this.parentNode.parentNode.getElementsByTagName("h3")[0].innerHTML;
+        newItem.price = this.parentNode.getElementsByClassName("price")[0].innerHTML;
+        jshint +W040
+        itemList.push(newItem);
+        Cookie.set("cart", JSON.stringify(itemList));
+    }*/
+
+    function addToCart() {
+        var itemList, newItem;
+        itemList = Cookie.get("cart");
+        if (itemList) {
+            itemList = JSON.parse(itemList);
+        } else {
+            itemList = [];
+        }
+        newItem = {};
+        newItem.title = $(this).parent().parent().find("h3").html();
+        newItem.price = $(this).parent().parent().find(".price").html();
+
+        itemList.push(newItem);
+        Cookie.set("cart", JSON.stringify(itemList));
     }
 
-    function MovieObject(t, p){
-        this.title = t;
-        this.price = p;
-    }
-
-    pub.setup = function() {
-        var f;
-
-        var buybutton = document.getElementsByClassName("buy");
-        for (f = 0; f < buybutton.length; f+=1) {
-            buybutton[f].onclick = addToCart;
-            buybutton[f].style.display = "pointer";
-        }
+    /**
+     * Setup function for the cart functions
+     *
+     * Gets a list of 'Buy' buttons, and sets them to call addToCart when clicked
+     */
+    pub.setup = function () {
+        // var buyButtons, b;
+        // buyButtons = document.getElementsByClassName("buy");
+        // for (b = 0; b < buyButtons.length; b += 1) {
+        //     buyButtons[b].onclick = addToCart;
+        // }
+        $(".buy").click(addToCart);
     };
+
+    // Expose public interface
     return pub;
 }());
 
-if (window.addEventListener) {
-    window.addEventListener('load', Cart.setup);
-}
-else if (window.attachEvent) {
-    window.attachEvent('onload', Cart.setup);
-}
-else {
-    alert("Could not attach 'cart.setup' to the 'window.onload' event");
-}
+// The usual onload event handling to call Cart.setup
+// if (window.addEventListener) {
+//     window.addEventListener('load', Cart.setup);
+// } else if (window.attachEvent) {
+//     window.attachEvent('onload', Cart.setup);
+// } else {
+//     window.alert("Could not attach 'Cart.setup' to the 'window.onload' event");
+// }
+$(document).ready(Cart.setup);
